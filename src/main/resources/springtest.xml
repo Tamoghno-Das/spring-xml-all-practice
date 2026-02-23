@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+  <bean id="pr" class="com.example.Project">
+      <property name="projectno" value="123"/>
+      <property name="projStack" value="SPRING-BOOT"/>
+  </bean>
+
+<bean id="r1" class="com.example.Student">
+    <constructor-arg name="sno" value="20"/>
+    <constructor-arg name="sname" value="Tom"/>
+    <constructor-arg name="project" ref="pr"/>
+</bean>
+
+   <bean id="m1" class="com.example.Manager">
+       <property name="mno" value="99"/>
+       <property name="mname" value="Amitava"/>
+       <property name= "skills">
+           <list>
+               <value>JAVA</value>
+               <value>AI</value>
+               <value>ML</value>
+               <value>SQL</value>
+           </list>
+       </property>
+
+       <property name= "salaryDetails">
+           <map>
+               <entry key="basicsalary" value="10000"/>
+               <entry key="allowance" value="2000"/>
+               <entry key="deduction" value="200"/>
+           </map>
+       </property>
+
+       <property name= "phoneNumbers">
+           <set>
+               <value>a@gmail.com</value>
+               <value>b@gmail.com</value>
+               </set>
+       </property>
+   </bean>
+
+    <bean id="mama" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:ORCL"/>
+        <property name="username" value="c##scott"/>
+        <property name="password" value="tiger"/>
+    </bean>
+    <bean id="kaka" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg>
+            <ref bean="mama"/>
+        </constructor-arg>
+    </bean>
+    <bean id="baba" class="com.example.JdbcTest">
+        <property name="jt">
+            <ref bean="kaka"/>
+        </property>
+    </bean>
+
+
+
+
+
+</beans>
